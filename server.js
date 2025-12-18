@@ -1,23 +1,30 @@
 const express = require('express');
-const { YTDlpWrap } = require('yt-dlp-wrap');
+const { spawn } = require('child_process');
 
 const app = express();
-const ytDlp = new YTDlpWrap();
-
 app.use(express.static('public'));
 
 app.get('/download', (req, res) => {
   const url = req.query.url;
-  if (!url) return res.send('No URL');
+  if (!url) {
+    return res.send('No URL provided');
+  }
 
   res.setHeader(
     'Content-Disposition',
     'attachment; filename="instagram.mp4"'
   );
 
-  ytDlp.execStream([url, '-f', 'mp4']).pipe(res);
+  const yt = spawn('yt-dlp', [
+    '-f', 'mp4',
+    '-o', '-',
+    url
+  ]);
+
+  yt.stdout.pipe(res);
+  yt.stderr.on('data', d => console.log(d.toString()));
 });
 
 app.listen(3000, () => {
-  console.log('Server running');
+  console.log('Server running on http://localhost:3000');
 });
