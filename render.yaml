@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: instagram-video-downloader
+    env: node
+    buildCommand: |
+      npm install
+      curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o yt-dlp
+      chmod +x yt-dlp
+      mv yt-dlp /usr/local/bin/yt-dlp
+    startCommand: node server.js
