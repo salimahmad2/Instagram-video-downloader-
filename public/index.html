@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram Video Downloader</title>
+
+  <meta name="description" content="Free Instagram video downloader. Download reels and videos online.">
+  <meta name="keywords" content="instagram video downloader, instagram reel downloader">
+  <meta name="robots" content="index, follow">
+
+  <style>
+    body{
+      background:#0f0f0f;
+      color:white;
+      font-family:Arial;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .box{
+      background:#1c1c1c;
+      padding:20px;
+      border-radius:10px;
+      width:300px;
+      text-align:center;
+    }
+    input,button{
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border:none;
+      border-radius:5px;
+    }
+    button{
+      background:#ff0066;
+      color:white;
+      font-size:16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>Instagram Video Downloader</h1>
+  <input id="url" placeholder="Paste Instagram link">
+  <button onclick="download()">Download</button>
+</div>
+
+<script>
+function download(){
+  const url = document.getElementById('url').value;
+  if(!url) alert('Paste link');
+  window.location = '/download?url=' + encodeURIComponent(url);
+}
+</script>
+
+</body>
+</html>
